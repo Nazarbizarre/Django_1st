@@ -2,8 +2,8 @@ from django.urls import path, include
 
 from .views import items_list
 
-app_name = 'carsite'
+app_name = 'blog'
 
 urlpatterns = [
-    path('carsite/', items_list, name='carsite'),
+    path('items/', items_list, name='items'),
 ]

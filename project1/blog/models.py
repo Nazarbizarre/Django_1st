@@ -1,36 +1,36 @@
 from django.db import models
 
-class Brand(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
     
     def __str__(self):
         return self.name
 
-class Car(models.Model):
+class Post(models.Model):
     class Status(models.TextChoices):
-        USED = 'U', 'Draft'
-        NEW = 'N', 'Published'
-    name = models.CharField(max_length=50)
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+    title = models.CharField(max_length=250)
     body = models.TextField(max_length=1000)
     created = models.DateTimeField(auto_now_add=True)
-    price = models.FloatField()
+    updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=2, 
         choices=Status,
         default=Status.DRAFT
     )
     category = models.ForeignKey(
-        Brand,
+        Category,
         on_delete=models.CASCADE,
-        related_name='cars',
+        related_name='posts',
     )
     
     class Meta:
-        ordering = ['-price']
+        ordering = ['-created']
         indexes= [
-            models.Index(fields=['-price'])
+            models.Index(fields=['-created'])
         ]
         
     def __str__(self):
-        return self.name
+        return self.title
     
