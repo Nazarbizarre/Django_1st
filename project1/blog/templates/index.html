@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>All products</h1>
+    <h1>Home</h1>
+
+    <div>
+        <h3>All Categories</h3>
+        {% for category in categories %}
+        <div>
+            <p>{{  category.name  }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h3>All Posts</h3>
+        {% for post in posts %}
+            <!-- <p><a href="{% url 'blog:post_info' post.id %}">{{  post.title  }}</a></p> -->
+            <p><a href="{{  post.get_absolute_url  }}">{{  post.title  }}</a></p>
+            <p>{{  post.description | truncatewords:10 }}</p>
+            <p>{{  post.created| date:"M d, Y"  }}</p>
+        {% endfor %}
+    </div>
 {% endblock %}

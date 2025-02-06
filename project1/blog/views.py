@@ -1,28 +1,17 @@
-from django.shortcuts import render
-
-items = {
-  "Doctor": {
-    "id": 1,
-    "description": "Other congenital malformations of heart",
-  }, 
-  "Good": {
-    "id": 2,
-    "description": "Drowning and submersion due to falling or jumping from unspecified burning watercraft, initial encounter",
-  }, 
-  "Bad": {
-    "id": 3,
-    "description": "Foreign body in other and multiple parts of external eye, unspecified eye, sequela",
-  }, 
-  "Great": {
-    "id": 4,
-    "description": "Other specified osteochondropathies, unspecified lower leg",
-  },
-}
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Post
 
 
+def home(request):
+  categories = Category.objects.all()
+  posts = Post.objects.all()
+  data = {"categories":categories, "posts":posts}
+  return render(request, "index.html", context=data)
 
-def items_list(request):
-    return render(request, "index.html")
+
+def post_info(request, post_id):
+  post = get_object_or_404(Post, id=post_id)
+  return render(request, "post.html", {'post':post})
   
   
  
