@@ -1,9 +1,11 @@
-{{% extends 'base.html' %}}
+{% extends 'base.html' %}
 
 {% block content %}
     <div>
-        <p>{{  post.title  }}</p>
-        <p>{{  post.description  }}</p>
-        <p>{{  post.created  }}</p>
+        <h1>{{  post.title  }}</h1>
+        <p>Category: {{  post.category  }}</p>
+        <p>Description: {{  post.body  }}</p>
+        <p>Created: {{  post.created  }}</p>
+
     </div>
 {% endblock %}

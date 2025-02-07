@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="width: 50%">
+    <h1>Add a new post here</h1>
+    <form action="{% url 'blog:create_post' %}", method="post">
+        {% csrf_token %}
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title" name="title" type="text" placeholder="Post Title"/>
+        <label class="form-label" for="body" style="margin-top: 25px">Description</label>
+        <textarea class="form-control" name="body", id="body" rows="10" ></textarea>
+        <label class="form-label" for="category" style="margin-top: 25px">Category</label>
+        <select name="category" id="category" style="width:100%">
+            {% for category in categories %}
+                <option value="{{  category.id  }}">{{  category  }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 25px">Create</button>
+    </form>
+</div>
+{% endblock %}

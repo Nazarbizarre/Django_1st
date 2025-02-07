@@ -2,12 +2,13 @@
 
 {% block content %}
     <h1>Home</h1>
+    <h3><a href="{% url 'blog:create_post' %}">Create your post here!</a></h3>
 
     <div>
         <h3>All Categories</h3>
         {% for category in categories %}
         <div>
-            <p>{{  category.name  }}</p>
+            <p><a href="{% url 'blog:get_posts_by_category' category.id %}">{{  category.name  }}</a></p>
         </div>
         {% endfor %}
     </div>
@@ -16,9 +17,9 @@
         <h3>All Posts</h3>
         {% for post in posts %}
             <!-- <p><a href="{% url 'blog:post_info' post.id %}">{{  post.title  }}</a></p> -->
-            <p><a href="{{  post.get_absolute_url  }}">{{  post.title  }}</a></p>
-            <p>{{  post.description | truncatewords:10 }}</p>
-            <p>{{  post.created| date:"M d, Y"  }}</p>
+            <p><a href="{{  post.get_absolute_url  }}">{{ post.title }} - {{ post.category.name }}</a></p>
+            <p>Description: {{  post.body | truncatewords:10 }}</p>
+            <p>Created: {{  post.created| date:"M d, Y"  }}</p>
         {% endfor %}
     </div>
 {% endblock %}
